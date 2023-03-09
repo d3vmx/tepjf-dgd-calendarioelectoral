@@ -1,17 +1,621 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendario electoral - TEPJF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+    <link href="css/app.css" rel="stylesheet" />
 </head>
 
 <body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-  </main>
+    <div class="row">
+        <div id="entidades" class="col-5 col-md-4 col-lg-3">
+            <h4 class="text-light px-2 m-1">Procesos</h4>
+        </div>
+        <div id="map" class="col-7 col-md-8 col-lg-9"></div>
+    </div>
+    <div id='calendar' class="p-2"></div>
+    <div id='calendarModal' class="modal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="calendarModal-title" class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th colspan="2" style="background-color:hsl(220,0%,85%)">
+                                Cargos a elegir
+                            </th>
+                            <td>
+                                <strong id="calendarModal-body-tipo-numero" class="d-block pb-2"></strong>
+                                <span id="calendarModal-body-extraordinariaGetDisplayName"
+                                    class="badge text-bg-secondary"></span>
+                                <span id="calendarModal-body-federalGetDisplayName"
+                                    class="badge text-bg-secondary"></span>
+                                <span id="calendarModal-body-representacionGetDisplayName"
+                                    class="badge text-bg-secondary"></span>
+                            </td>
+                            <td id="calendarModal-body-cargosUrl" width="115"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="background-color:hsl(0,50%,85%)">
+                                Declaratoria de inicio del proceso electoral
+                            </th>
+                            <td id="calendarModal-body-declaratoriaInicio"> </td>
+                            <td id="calendarModal-body-declaratoriaUrl">                            </td>
+                        </tr>
+                        <tr>
+                            <td width="120" rowspan="6" style="background-color:hsl(180,25%,85%)">
+                                Candidaturas<br>independientes
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="180" style="background-color:hsl(180,25%,90%)">
+                                Convocatoria
+                            </td>
+                            <td>
+                                del <span id="calendarModal-body-independientesConvocatoriaInicio"></span> al <span
+                                    id="calendarModal-body-independientesConvocatoriaFin"></span>
+                            </td>
+                            <td id="calendarModal-body-independientesConvocatoriaUrl"> </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:hsl(180,25%,90%)">
+                                Manifestación<br>de intención
+                            </td>
+                            <td>
+                                del <span id="calendarModal-body-independientesIntencionInicio"></span> al <span
+                                    id="calendarModal-body-independientesIntencionFin"></span>
+                            </td>
+                            <td id="calendarModal-body-independientesIntencionUrl"></td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:hsl(180,25%,90%)">
+                                Obtención de<br>apoyo ciudadano
+                            </td>
+                            <td>
+                                del <span id="calendarModal-body-independientesApoyoInicio"></span> al <span
+                                    id="calendarModal-body-independientesApoyoFin"></span>
+                            </td>
+                            <td id="calendarModal-body-independientesApoyoUrl"></td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:hsl(180,25%,90%)">
+                                Solicitud de registro<br>de candidatos
+                            </td>
+                            <td>
+                                del <span id="calendarModal-body-independientesRegistroInicio"></span> al <span
+                                    id="calendarModal-body-independientesRegistroFin"></span>
+                            </td>
+                            <td id="calendarModal-body-independientesRegistroUrl"></td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:hsl(180,25%,90%)">
+                                Declaratoria de<br>procedencia de candidatura
+                            </td>
+                            <td>
+                                del <span id="calendarModal-body-independientesProcedenciaInicio"></span> al <span
+                                    id="calendarModal-body-independientesProcedenciaFin"></span>
+                            </td>
+                            <td id="calendarModal-body-independientesProcedenciaUrl"></td>
+                        </tr>
+                        <tr>
+                            <td width="120" rowspan="3" style="background-color:hsl(60,25%,85%)">
+                                Partidos<br>políticos
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:hsl(60,25%,90%)">
+                                Precampañas<br>electorales
+                            </td>
+                            <td>
+                                del <span id="calendarModal-body-partidosPrecampanasInicio"></span> al <span
+                                    id="calendarModal-body-partidosPrecampanasFin"></span>
+                            </td>
+                            <td id="calendarModal-body-partidosPrecampanasUrl"></td>
+                        </tr>
+                        <tr>
+                            <td style="background-color:hsl(60,25%,90%)">
+                                Solicitud<br>de registro
+                            </td>
+                            <td>
+                                del <span id="calendarModal-body-partidosRegistroInicio"></span> al <span
+                                    id="calendarModal-body-partidosRegistroFin"></span>
+                            </td>
+                            <td id="calendarModal-body-partidosRegistroUrl"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="background-color:hsl(240,25%,85%)">
+                                Campañas electorales
+                            </th>
+                            <td>
+                                del <span id="calendarModal-body-campanasInicio"></span> al <span
+                                    id="calendarModal-body-campanasFin"></span>
+                            </td>
+                            <td id="calendarModal-body-campanasUrl"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="background-color:hsl(120,25%,85%)">
+                                Jornada electoral
+                            </th>
+                            <td>
+                                del <span id="calendarModal-body-jornadaInicio"></span> al <span
+                                    id="calendarModal-body-jornadaFin"></span>
+                            </td>
+                            <td id="calendarModal-body-jornadaUrl"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="2" style="background-color:hsl(0,50%,85%)">
+                                Fecha de instalación
+                            </th>
+                            <td id="calendarModal-body-instalacionInicio"> </td>
+                            <td id="calendarModal-body-instalacionUrl"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="progress"><b></b></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+        integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script type='text/javascript' src='js/app.js'></script>
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol' async defer></script>
+    <script type="text/javascript">
+        var map, infobox, data;
+        document.body.onload = function () {
+            onLoading(true);
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://cendocadmin.azurewebsites.net/api/calendario');
+            xhr.onload = function (e) {
+                if (xhr.status != 200) {
+                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                } else {
+                    var data = JSON.parse(xhr.response);
+                    Window.Entidades = data;
+                    loadEntidades();
+                    loadBingMap();
+                    loadCalendar();
+                    var fechas = [];
+                    data.forEach(e => {
+                        fechas.push({
+                            id: e.id,
+                            title: `Inicio`,
+                            description: `Declaratoria de inicio del proceso electoral [${e.entidad.nombre}]`,
+                            start: e.declaratoriaInicio,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(0,50%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Independientes: Convocatoria`,
+                            description: `Convocatoria de las candidaturas independientes [${e.entidad.nombre}]`,
+                            start: e.independientesConvocatoriaInicio,
+                            end: e.independientesConvocatoriaFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(180,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Independientes: Manifestación de intención`,
+                            description: `Manifestación de intención de las candidaturas independientes [${e.entidad.nombre}]`,
+                            start: e.independientesIntencionInicio,
+                            end: e.independientesIntencionFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(180,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Independientes: Obtención de apoyo`,
+                            description: `Obtención de apoyo de las candidaturas independientes [${e.entidad.nombre}]`,
+                            start: e.independientesApoyoInicio,
+                            end: e.independientesApoyoFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(180,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Independientes: Solicitud de registro`,
+                            description: `Solicitud de registro de las candidaturas independientes [${e.entidad.nombre}]`,
+                            start: e.independientesRegistroInicio,
+                            end: e.independientesRegistroFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(180,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Independientes: Declaratoria de procedencia`,
+                            description: `Declaratoria de procedencia de las candidaturas independientes [${e.entidad.nombre}]`,
+                            start: e.independientesProcedenciaInicio,
+                            end: e.independientesProcedenciaFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(180,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Partidos: Precampañas`,
+                            description: `Precampañas de partidos políticos [${e.entidad.nombre}]`,
+                            start: e.partidosPrecampanasInicio,
+                            end: e.partidosPrecampanasFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(60,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Partidos: Solicitud de registro`,
+                            description: `Solicitud de registro de los partidos políticos [${e.entidad.nombre}]`,
+                            start: e.partidosRegistroInicio,
+                            end: e.partidosRegistroFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(60,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Campañas`,
+                            description: `Campañas electorales [${e.entidad.nombre}]`,
+                            start: e.campanasInicio,
+                            end: e.campanasFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(240,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Jornada`,
+                            description: `Jornada electoral	[${e.entidad.nombre}]`,
+                            start: e.jornadaInicio,
+                            end: e.jornadaFin,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(120,25%,85%)`
+                        });
+                        fechas.push({
+                            id: e.id,
+                            title: `Instalación`,
+                            description: `Fecha de instalación [${e.entidad.nombre}]`,
+                            start: e.instalacionInicio,
+                            allDay: true,
+                            textColor: `#000`,
+                            color: `hsl(0,50%,85%)`
+                        });
+                    });
+                    Window.Fechas = fechas;
+                    onLoading(false);
+                }
+            };
+            xhr.onerror = function () {
+                console.error("** An error occurred during the XMLHttpRequest");
+            };
+            xhr.send();
+        }
+        function loadEntidades() {
+            var data = Window.Entidades;
+            let menu = document.createElement('div');
+            menu.className = 'list-group p-2';
+            data.forEach(e => {
+                let item = document.createElement('a');
+                item.className = 'list-group-item list-group-item-action';
+                item.addEventListener("click", function () {
+                    onLoading(true);
+                    modalInfo(e.id);
+                }, false);
+                item.innerHTML = `<strong style="color:hsl(${e.entidad.colorHue},50%,50%)">${e.entidad.nombre}</strong>: ${e.tipo} [${e.numero}]`;
+                menu.appendChild(item);
+            });
+            document.getElementById('entidades').appendChild(menu);
+        }
+        function loadBingMap() {
+            var data = Window.Entidades;
+            map = new Microsoft.Maps.Map(document.getElementById('map'), {
+                credentials: 'Ah5zHTWDWEHh2A3EW50XKN8GEM1u2NBuLspNLzQKVG4XYexEIUs_DU8scCLBidgh',
+                mapTypeId: Microsoft.Maps.MapTypeId.grayscale,
+                center: new Microsoft.Maps.Location(23.5, -101.5),
+                showDashboard: false,
+                zoom: 6
+            });
+            data.forEach(e => {
+                Microsoft.Maps.loadModule(['Microsoft.Maps.SpatialDataService', 'Microsoft.Maps.Search'], function () {
+                    var searchManager = new Microsoft.Maps.Search.SearchManager(map);
+                    var geocodeRequest = {
+                        where: e.entidad.nombre,
+                        callback: function (geocodeResult, userData) {
+                            var geoDataRequestOptions = {
+                                lod: 1,
+                                getAllPolygons: true
+                            };
+                            var polygonStyle = {
+                                fillColor: `hsla(${e.entidad.colorHue},100%,90%,0.2)`,
+                                strokeColor: `hsl(${e.entidad.colorHue},30%,50%)`,
+                                strokeThickness: 2
+                            };
+                            switch (geocodeResult.results[0].entityType) {
+                                case "CountryRegion":
+                                case "AdminDivision1":
+                                case "AdminDivision2":
+                                case "Postcode1":
+                                case "Postcode2":
+                                case "Postcode3":
+                                case "Postcode4":
+                                case "Neighborhood":
+                                case "PopulatedPlace":
+                                    geoDataRequestOptions.entityType = geocodeResult.results[0].entityType;
+                                    break;
+                                default:
+                                    var pin = new Microsoft.Maps.Pushpin(geocodeResult.results[0].location);
+                                    map.entities.push(pin);
+                                    return;
+                            }
+                            Microsoft.Maps.SpatialDataService.GeoDataAPIManager.getBoundary(
+                                geocodeResult.results[0].location,
+                                geoDataRequestOptions,
+                                map,
+                                function (data) {
+                                    console.log();
+                                    if (data.results && data.results.length > 0) {
+                                        // var labelPin = new Microsoft.Maps.Pushpin(geocodeResult.results[0].location, {
+                                        //     icon: '<svg xmlns="https://www.w3.org/2000/svg" width="1" height="1"></svg>',
+                                        //     title: `${e.entidad.abrebiatura} [${e.numero}]`
+                                        // });
+                                        // map.entities.push(labelPin);
+                                        var polygon = data.results[0].Polygons;
+                                        polygon.metadata = {
+                                            //label: labelPin,
+                                            title: e.entidad.nombre,
+                                            description: `${e.tipoDisplayName} (${e.numero})`,
+                                            count: e.numero
+                                        };
+                                        map.entities.push(polygon);
+                                        Microsoft.Maps.Events.addHandler(polygon[0], 'click', function () {
+                                            onLoading(true);
+                                            modalInfo(e.id);
+                                        });
+                                    } else {
+                                        var pin = new Microsoft.Maps.Pushpin(data.location);
+                                        map.entities.push(pin);
+                                        Microsoft.Maps.Events.addHandler(pin, 'click', function () {
+                                            onLoading(true);
+                                            modalInfo(e.id);
+                                        });
+                                    }
+                                },
+                                polygonStyle,
+                                function errCallback(networkStatus, statusMessage) {
+                                    console.log(networkStatus);
+                                    console.log(statusMessage);
+                                });
+                        }
+                    };
+                    searchManager.geocode(geocodeRequest);
+                });
+            });
+        }
+        function loadCalendar() {
+            var data = Window.Entidades;
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'multiMonthYear', // dayGridMonth timeGridDay
+                multiMonthMaxColumns: 2,
+                // eventLimit: false,
+                // views: {
+                //     timeGrid: {
+                //         eventLimit: 3 // adjust to 6 only for timeGridWeek/timeGridDay
+                //     }
+                // },
+                headerToolbar: {
+                    right: 'today,prev,next'
+                },
+                contentHeight: 'auto',
+                themeSystem: 'bootstrap5',
+                height: 'auto',
+                timeZone: 'UTC',
+                // titleFormat: {
+                //     //weekday: 'long',
+                //     //year: 'numeric',
+                //     month: 'long',
+                //     day: 'numeric'
+                // },
+                //initialDate: new Date(today),
+                //now: '',
+                //nowIndicator: true,
+                //events: fechas,
+                eventClick: function (e) {
+                    onLoading(true);
+                    modalInfo(e.event._def.publicId);
+                    //e.el.style.borderColor = 'red';
+                },
+                // eventDidMount: function (info) {
+                //     var tooltip = new Tooltip(info.el, {
+                //         title: info.event.extendedProps.description,
+                //         placement: 'top',
+                //         trigger: 'hover',
+                //         container: 'body'
+                //     });
+                // },
+                buttonText: {
+                    today: 'hoy',
+                    month: 'mes',
+                    week: 'semana',
+                    day: 'día',
+                    list: 'lista'
+                }
+            });
+            calendar.setOption('locale', 'mx');
+            calendar.render();
+            Window.Calendar = calendar;
+        }
+        function modalInfo(id) {
+            var entidades = Window.Entidades;
+            const elemento = entidades.find(e => e.id = id);
+            console.log(elemento);
+
+            var fechas = Window.Fechas;
+            var calendar = Window.Calendar;
+            calendar.getEvents().forEach(e => {
+                e.remove();
+            });
+            fechas.forEach(e => {
+                calendar.addEvent(e);
+            });
+            const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            document.getElementById('calendarModal-title').innerHTML = elemento.entidad.nombre;
+            document.getElementById('calendarModal-body-tipo-numero').innerHTML = `${elemento.tipoDisplayName} (${elemento.numero} cargos)`;
+            document.getElementById('calendarModal-body-extraordinariaGetDisplayName').innerHTML = elemento.extraordinariaGetDisplayName;
+            document.getElementById('calendarModal-body-federalGetDisplayName').innerHTML = elemento.federalGetDisplayName;
+            document.getElementById('calendarModal-body-representacionGetDisplayName').innerHTML = elemento.representacionGetDisplayName;
+            elemento.cargosUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-cargosUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-declaratoriaInicio').innerHTML = new Date(elemento.declaratoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.declaratoriaUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-declaratoriaUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-independientesConvocatoriaInicio').innerHTML = new Date(elemento.independientesConvocatoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesConvocatoriaFin').innerHTML = new Date(elemento.independientesConvocatoriaFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.independientesConvocatoriaUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-independientesConvocatoriaUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-independientesIntencionInicio').innerHTML = new Date(elemento.independientesIntencionInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesIntencionFin').innerHTML = new Date(elemento.independientesIntencionFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.independientesIntencionUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-independientesIntencionUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-independientesApoyoInicio').innerHTML = new Date(elemento.independientesApoyoInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesApoyoFin').innerHTML = new Date(elemento.independientesApoyoFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.independientesApoyoUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-independientesApoyoUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-independientesRegistroInicio').innerHTML = new Date(elemento.independientesRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesRegistroFin').innerHTML = new Date(elemento.independientesRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.independientesRegistroUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-independientesRegistroUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-independientesProcedenciaInicio').innerHTML = new Date(elemento.independientesProcedenciaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesProcedenciaFin').innerHTML = new Date(elemento.independientesProcedenciaFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.independientesProcedenciaUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-independientesProcedenciaUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-partidosPrecampanasInicio').innerHTML = new Date(elemento.partidosPrecampanasInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosPrecampanasFin').innerHTML = new Date(elemento.partidosPrecampanasFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.partidosPrecampanasUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-partidosPrecampanasUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-partidosRegistroInicio').innerHTML = new Date(elemento.partidosRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosRegistroFin').innerHTML = new Date(elemento.partidosRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.partidosRegistroUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-partidosRegistroUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-campanasInicio').innerHTML = new Date(elemento.campanasInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-campanasFin').innerHTML = new Date(elemento.campanasFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.campanasUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-campanasUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-jornadaInicio').innerHTML = new Date(elemento.jornadaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-jornadaFin').innerHTML = new Date(elemento.jornadaFin).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.jornadaUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-jornadaUrl').appendChild(item);
+            });
+
+            document.getElementById('calendarModal-body-instalacionInicio').innerHTML = new Date(elemento.instalacionInicio).toLocaleDateString('es-MX', opcionesFecha);
+            elemento.instalacionUrl.split(',').forEach((e, i) => {
+                let item = document.createElement('a');
+                item.text = `Referencia ${++i}`;
+                item.className = 'btn btn-sm btn-outline-secondary';
+                item.setAttribute('target', '_blank');
+                item.setAttribute('href', e);
+                document.getElementById('calendarModal-body-instalacionUrl').appendChild(item);
+            });
+
+            //document.getElementById('calendarModal-body-').innerHTML = elemento.;
+
+            onLoading(false);
+            $('#calendarModal').modal('show');
+        }
+    </script>
 </body>
 
 </html>
