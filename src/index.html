@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calendario electoral - TEPJF</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,13 +29,16 @@
                             <i class="bi bi-envelope-fill fs-5"></i>
                         </a>
                     </div>
-                    <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                    <div class="d-flex flex-fill flex-column flex-sm-row justify-content-around align-items-center">
+                        <div class="px-3 text-center lh-sm">
+                            <strong style="color: hsl(250,50%,30%);">Calendario electoral</strong>
+                        </div>
                         <a class="px-3" href="https://www.te.gob.mx/">
                             <img src="img/tepjf.svg" height="72"
                                 alt="Tribunal Electoral del Poder Judicial de la Federación">
                         </a>
                         <div class="px-3 text-center lh-sm">
-                            <strong style="color: hsl(250,50%,30%);">Dirección General de Documentación</strong>
+                            <strong style="color: hsl(250,50%,30%);">Dirección General de<br>Documentación</strong>
                         </div>
                     </div>
                     <div>
@@ -52,7 +56,7 @@
         </div>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Calendario electoral</a>
+                <!-- <a class="navbar-brand" href="#">Calendario electoral</a> -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -60,10 +64,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/">Inicio</a>
                         </li>
-                        <li class="nav-item dropdown">
+                        <li class="nav-item">
+                            <a class="nav-link" href="Tabla.html">Tabla</a>
+                        </li>
+                         <!--<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 Dropdown
@@ -133,7 +140,7 @@
                 </div>
             </div>
             <div>
-                <small class="text-muted">v2.0.1</small>
+                <small class="text-muted">v2.1.0</small>
             </div>
         </div>
     </footer>
@@ -178,8 +185,7 @@
                                 Convocatoria
                             </td>
                             <td>
-                                del <span id="calendarModal-body-independientesConvocatoriaInicio"></span> al <span
-                                    id="calendarModal-body-independientesConvocatoriaFin"></span>
+                                <span id="calendarModal-body-independientesConvocatoriaInicio"></span>
                             </td>
                             <td id="calendarModal-body-independientesConvocatoriaUrl"> </td>
                         </tr>
@@ -481,7 +487,7 @@
             calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'multiMonthYear', // dayGridMonth timeGridDay
                 multiMonthMinColumns: 2,
-                multiMonthMaxColumns: 4,
+                multiMonthMaxColumns: 3,
                 // eventLimit: false,
                 // views: {
                 //     timeGrid: {
@@ -560,7 +566,6 @@
                 title: `Independientes: Convocatoria`,
                 description: `Convocatoria de las candidaturas independientes [${data.entidad.nombre}]`,
                 start: data.independientesConvocatoriaInicio,
-                end: data.independientesConvocatoriaFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(180,25%,85%)`
@@ -675,7 +680,6 @@
             });
 
             document.getElementById('calendarModal-body-independientesConvocatoriaInicio').innerHTML = new Date(data.independientesConvocatoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-independientesConvocatoriaFin').innerHTML = new Date(data.independientesConvocatoriaFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesConvocatoriaUrl').innerHTML = '';
             data.independientesConvocatoriaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendario electoral - TEPJF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
+    <link href="css/app.css" rel="stylesheet" />
+    <style>
+        * {
+            font-size: 14px;
+            line-height: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 class="p-0">
+        CALENDARIO ELECTORAL<br />
+        <small>Tribunal Electoral del Poder Judicial de la Federación</small>
+    </h4>
+    <table id="table" class="table table-sm text-center" style="width:100%; min-width:1400px">
+        <thead>
+            <tr>
+                <th rowspan="2" style="background-color:hsl(0,0%,85%)">
+                    Entidad
+                </th>
+                <th rowspan="2" style="background-color:hsl(0,0%,85%)">
+                    Cargos a elegir
+                </th>
+                <th width="120" rowspan="2" style="background-color:hsl(0,50%,85%)" data-bs-toggle="tooltip"
+                    title="Declaratoria de inicio del proceso electoral">
+                    Inicio del proceso
+                </th>
+                <th width="600" colspan="5" style="background-color:hsl(180,25%,85%)">
+                    Candidaturas independientes
+                </th>
+                <th width="220" colspan="2" style="background-color:hsl(60,25%,85%)">
+                    Partidos políticos
+                </th>
+                <th width="120" rowspan="2" style="background-color:hsl(240,25%,85%)" data-bs-toggle="tooltip"
+                    title="Campañas electorales">
+                    Campañas
+                </th>
+                <th width="120" rowspan="2" style="background-color:hsl(0,50%,85%)" data-bs-toggle="tooltip"
+                    title="Jornada electoral">
+                    Jornada
+                </th>
+                <th width="120" rowspan="2" style="background-color:hsl(120,25%,85%)" data-bs-toggle="tooltip"
+                    title="Fecha de instalación">
+                    Instalación
+                </th>
+            </tr>
+            <tr>
+                <td width="120" data-bs-toggle="tooltip" title="Convocatoria" style="background-color:hsl(180,25%,90%)">
+                    Convocatoria
+                </td>
+                <td width="120" data-bs-toggle="tooltip" title="Manifestación de intención"
+                    style="background-color:hsl(180,25%,90%)">
+                    Manifestación de intención
+                </td>
+                <td width="120" data-bs-toggle="tooltip" title="Obtención de apoyo ciudadano"
+                    style="background-color:hsl(180,25%,90%)">
+                    Obtención de apoyo
+                </td>
+                <td width="120" data-bs-toggle="tooltip" title="Solicitud de registro de candidatos"
+                    style="background-color:hsl(180,25%,90%)">
+                    Solicitud de registro
+                </td>
+                <td width="120" data-bs-toggle="tooltip" title="Declaratoria de procedencia de candidatura"
+                    style="background-color:hsl(180,25%,90%)">
+                    Declaratoria de procedencia
+                </td>
+                <td width="120" data-bs-toggle="tooltip" title="Precampañas electorales"
+                    style="background-color:hsl(60,25%,90%)">
+                    Precampañas
+                </td>
+                <td width="120" data-bs-toggle="tooltip" title="Solicitud de registro de candidatos"
+                    style="background-color:hsl(60,25%,90%)">
+                    Solicitud de registro
+                </td>
+            </tr>
+        </thead>
+        <tbody id="entidades-tbody"></tbody>
+    </table>
+    <ul>
+        <li style="font-size: 11px;">Fecha y hora de consulta: XX.</li>
+        <li style="font-size: 11px;">MR, mayoría relativa; RP, representación proporcional; Fed, Federal; Loc, Local;
+            Ord, Ordinaria; y Ext, Extraordinaria.</li>
+        <li style="font-size: 11px;">La presente versión puede estar sujeta a cambios en las fechas citadas dependiendo
+            de los decretos, acuerdos, convocatorias y calendarios electorales que aprueben las autoridades competentes.
+        </li>
+        <li style="font-size: 11px;">Los datos se validaron de acuerdo con las disposiciones normativas de cada entidad.
+        </li>
+    </ul>
+    <div id="modalReferencia" class="modal fade" tabindex="-1" aria-labelledby="modelDetalleslLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 id="modalReferenciaHeader" class="modal-title fs-5"></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modalReferenciaBody" class="modal-body"></div>
+                <div id="modalReferenciaFooter" class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+    <div id="progress" style="display: flex;"><b></b></div>
+    <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
+        integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script type='text/javascript' src='js/app.js'></script>
+    <script>
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
+    <script type="text/javascript">
+        var map, calendar;
+        document.body.onload = function () {
+            document.getElementById('progress').style.display = 'flex';
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://cendocadmin.azurewebsites.net/api/calendario');
+            xhr.onload = function (e) {
+                if (xhr.status != 200) {
+                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                } else {
+                    const data = JSON.parse(xhr.response);
+                    data.forEach(e => {
+                        loadTabla(e);
+                    });
+                }
+            };
+            xhr.onerror = function () {
+                console.error("** An error occurred during the XMLHttpRequest");
+            };
+            xhr.send();
+            document.getElementById('progress').style.display = 'none';
+        }
+        function loadTabla(data) {
+            const opcionesFechaLarga = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const opcionesFecha = { year: 'numeric', month: 'short', day: 'numeric' };
+
+            let tableRow = document.createElement('tr');
+
+            let tableTdEntidadGetEnum = document.createElement('td');
+            tableTdEntidadGetEnum.innerHTML = `${data.entidad.nombre}`;
+            tableRow.appendChild(tableTdEntidadGetEnum);
+
+            let cargos = document.createElement('td');
+            cargos.innerHTML = `<span class="d-block pb-2">${data.tipoDisplayName} (${data.numero} cargos)</span>
+                            <span class="badge text-bg-secondary" data-bs-toggle="tooltip" title="${data.extraordinariaGetDisplayName}">${data.extraordinaria ? "Ext" : "Ord"}</span>
+                            <span class="badge text-bg-secondary" data-bs-toggle="tooltip" title="${data.federalGetDisplayName}">${data.federal ? "Fed" : "Loc"}</span>
+                            <span class="badge text-bg-secondary" data-bs-toggle="tooltip" title="${data.representacionGetDisplayName}">${data.representacion ? "RP" : "MR"}</span><br>
+                            <a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','cargos')">Referencia</a>`;
+            tableRow.appendChild(cargos);
+
+            let declaratoria = document.createElement('td');
+            declaratoria.setAttribute('title', new Date(data.declaratoriaInicio).toLocaleDateString('es-MX', opcionesFechaLarga));
+            declaratoria.innerHTML = `${new Date(data.declaratoriaInicio).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','declaratoria')">Referencia</a>`;
+            tableRow.appendChild(declaratoria);
+
+            let independientesConvocatoria = document.createElement('td');
+            independientesConvocatoria.setAttribute('title', `${new Date(data.independientesConvocatoriaInicio).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            independientesConvocatoria.innerHTML = `${new Date(data.independientesConvocatoriaInicio).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(independientesConvocatoria);
+
+            let independientesIntencion = document.createElement('td');
+            independientesIntencion.setAttribute('title', `del ${new Date(data.independientesIntencionInicio).toLocaleDateString('es-MX', opcionesFechaLarga)} al ${new Date(data.independientesIntencionFin).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            independientesIntencion.innerHTML = `${new Date(data.independientesIntencionInicio).toLocaleDateString('es-MX', opcionesFecha)} al ${new Date(data.independientesIntencionFin).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(independientesIntencion);
+
+            let independientesApoyo = document.createElement('td');
+            independientesApoyo.setAttribute('title', `del ${new Date(data.independientesApoyoInicio).toLocaleDateString('es-MX', opcionesFechaLarga)} al ${new Date(data.independientesApoyoFin).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            independientesApoyo.innerHTML = `${new Date(data.independientesApoyoInicio).toLocaleDateString('es-MX', opcionesFecha)} al ${new Date(data.independientesApoyoFin).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(independientesApoyo);
+
+            let independientesRegistro = document.createElement('td');
+            independientesRegistro.setAttribute('title', `del ${new Date(data.independientesRegistroInicio).toLocaleDateString('es-MX', opcionesFechaLarga)} al ${new Date(data.independientesRegistroFin).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            independientesRegistro.innerHTML = `${new Date(data.independientesRegistroInicio).toLocaleDateString('es-MX', opcionesFecha)} al ${new Date(data.independientesRegistroFin).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(independientesRegistro);
+
+            let independientesProcedencia = document.createElement('td');
+            independientesProcedencia.setAttribute('title', `del ${new Date(data.independientesProcedenciaInicio).toLocaleDateString('es-MX', opcionesFechaLarga)} al ${new Date(data.independientesProcedenciaFin).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            independientesProcedencia.innerHTML = `${new Date(data.independientesProcedenciaInicio).toLocaleDateString('es-MX', opcionesFecha)} al ${new Date(data.independientesProcedenciaFin).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(independientesProcedencia);
+
+            let partidosPrecampanas = document.createElement('td');
+            partidosPrecampanas.setAttribute('title', `del ${new Date(data.partidosPrecampanasInicio).toLocaleDateString('es-MX', opcionesFechaLarga)} al ${new Date(data.partidosPrecampanasFin).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            partidosPrecampanas.innerHTML = `${new Date(data.partidosPrecampanasInicio).toLocaleDateString('es-MX', opcionesFecha)} al ${new Date(data.partidosPrecampanasFin).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(partidosPrecampanas);
+
+            let partidosRegistro = document.createElement('td');
+            partidosRegistro.setAttribute('title', `del ${new Date(data.partidosRegistroInicio).toLocaleDateString('es-MX', opcionesFechaLarga)} al ${new Date(data.partidosRegistroFin).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            partidosRegistro.innerHTML = `${new Date(data.partidosRegistroInicio).toLocaleDateString('es-MX', opcionesFecha)} al ${new Date(data.partidosRegistroFin).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(partidosRegistro);
+            
+            let campanas = document.createElement('td');
+            campanas.setAttribute('title', `${new Date(data.campanasInicio).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            campanas.innerHTML = `${new Date(data.campanasInicio).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(campanas);
+            
+            let jornada = document.createElement('td');
+            jornada.setAttribute('title', `${new Date(data.jornadaInicio).toLocaleDateString('es-MX', opcionesFechaLarga)} al ${new Date(data.jornadaFin).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            jornada.innerHTML = `${new Date(data.jornadaInicio).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(jornada);
+            
+            let instalacion = document.createElement('td');
+            instalacion.setAttribute('title', `${new Date(data.instalacionInicio).toLocaleDateString('es-MX', opcionesFechaLarga)}`);
+            instalacion.innerHTML = `${new Date(data.instalacionInicio).toLocaleDateString('es-MX', opcionesFecha)}<br><a class="btn btn-sm btn-link p-0" onclick="modalReferencia('${data.id}','independientesConvocatoria')">Referencia</a>`;
+            tableRow.appendChild(instalacion);
+
+            document.getElementById('entidades-tbody').appendChild(tableRow);
+
+        }
+        function modalReferencia(id, nombre) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `https://cendocadmin.azurewebsites.net/api/calendario/${id}`);
+            xhr.onload = function (e) {
+                if (xhr.status != 200) {
+                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                }
+                else {
+                    const data = JSON.parse(xhr.response);
+                    document.getElementById('modalReferenciaHeader').innerHTML = data.entidad.nombre;
+                    document.getElementById('modalReferenciaBody').innerHTML = data[`${nombre}Referencia`] == null ? 'Sin datos' : data[`${nombre}Referencia`].replace(/(?:\r\n|\r|\n)/g, '<br>');
+                    document.getElementById('modalReferenciaFooter').innerHTML = '';
+                    data[`${nombre}Url`].split(',').forEach((e, i) => {
+                        let item = document.createElement('a');
+                        item.text = `Referencia ${++i}`;
+                        item.className = 'btn btn-primary';
+                        item.setAttribute('target', '_blank');
+                        item.setAttribute('href', e);
+                        document.getElementById('modalReferenciaFooter').appendChild(item);
+                    });
+                }
+            };
+            xhr.onerror = function () {
+                console.error("** An error occurred during the XMLHttpRequest");
+            };
+            xhr.send();
+            $('#modalReferencia').modal('show');
+        }
+    </script>
+</body>
+
+</html>
