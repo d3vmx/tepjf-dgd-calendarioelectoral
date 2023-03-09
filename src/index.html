@@ -8,18 +8,135 @@
     <title>Calendario electoral - TEPJF</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
     <link href="css/app.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div class="row">
-        <div id="entidades" class="col-5 col-md-4 col-lg-3">
-            <h4 class="text-light px-2 m-1">Procesos</h4>
+    <header>
+        <div class="shadow py-2">
+            <div class="py-2 px-1 bg-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <a href="/" target="_blank" id="Inicio" aria-label="Boton Inicio">
+                            <i class="bi bi-house-door-fill fs-5"></i>
+                        </a>
+                        <a href="mailto:cendoc@te.gob.mx?Subject=Contacto%20CENDOC%20landing%20page"
+                            aria-label="Correo contacto web" title="se abrirá aplicación de correo">
+                            <i class="bi bi-envelope-fill fs-5"></i>
+                        </a>
+                    </div>
+                    <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+                        <a class="px-3" href="https://www.te.gob.mx/">
+                            <img src="img/tepjf.svg" height="72"
+                                alt="Tribunal Electoral del Poder Judicial de la Federación">
+                        </a>
+                        <div class="px-3 text-center lh-sm">
+                            <strong style="color: hsl(250,50%,30%);">Dirección General de Documentación</strong>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="https://www.facebook.com/TEPJF" target="_blank" rel="noreferrer noopener"
+                            aria-label="Redes Sociales Facebook">
+                            <i class="bi bi-facebook fs-5"></i>
+                        </a>
+                        <a href="https://twitter.com/TEPJF_informa" target="_blank" rel="noreferrer noopener"
+                            aria-label="Redes Sociales Twitter">
+                            <i class="bi bi-twitter fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="map" class="col-7 col-md-8 col-lg-9"></div>
-    </div>
-    <div id='calendar' class="p-2"></div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Calendario electoral</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li> -->
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="container-fluid">
+        <div class="row">
+            <div id="entidades" class="col-5 col-md-4 col-lg-3">
+                <nav class="sidebar list-group my-2">
+                    <ul id="entidades-menu" class="nav flex-column"></ul>
+                </nav>
+            </div>
+            <div id="map" class="col-7 col-md-8 col-lg-9"></div>
+        </div>
+        <div class="row">
+            <div id='calendar' class="col p-2"></div>
+        </div>
+    </section>
+    <footer class="text-center font-small" style="background-color: #eee;">
+        <div class="d-flex justify-content-around align-items-center">
+            <div>
+                <a class="html5 iconos_accesibilidad"
+                    href="https://validator.w3.org/nu?doc=https://calendario-electoral.tepjf.com/" target="_blank"
+                    aria-label="Sello Accesibilidad" rel="noreferrer noopener">
+                    <img class="img-fluid mt-4" src="https://www.te.gob.mx/media/images/portal/html5.png"
+                        alt="Validation HTML5">
+                </a>
+                <a class="css iconos_accesibilidad"
+                    href="http://jigsaw.w3.org/css-validator/validator?uri=https://calendario-electoral.tepjf.com/&amp;profile=css3svg&amp;usermedium=all&amp;warning=1&amp;vextwarning=&amp;lang=es"
+                    target="_blank" aria-label="Sello Accesibilidad" rel="noreferrer noopener">
+                    <img class="img-fluid mt-4" src="https://www.te.gob.mx/media/images/portal/css.png"
+                        alt="Validation CSS">
+                </a>
+            </div>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="pt-4">
+                    Dirección General de Documentación<br>
+                    Teléfonos 55-5728-2300 y 55-5728-2400, ext. 2206 y 2574.<br>
+                    lunes a viernes de 9:00 a 18:00 horas<br>
+                    <a href="mailto:cendoc@te.gob.mx">cendoc@te.gob.mx</a>
+                </div>
+                <div class="py-4 font-weight-bold">
+                    Tribunal Electoral del Poder Judicial de la Federación (TEPJF)<br>
+                    Teléfonos 55-5728-2300 y 55-5484-5410.<br>
+                    Todos los derechos reservados.
+                    <p>
+                        <a href="https://www.te.gob.mx/transparencia/front/buscador/datos_personales#aviso"
+                            target="_blank" rel="noreferrer noopener">Protección de Datos Personales</a>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <small class="text-muted">v2.0.1</small>
+            </div>
+        </div>
+    </footer>
     <div id='calendarModal' class="modal" tabindex="-1">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
@@ -160,7 +277,7 @@
             </div>
         </div>
     </div>
-    <div id="progress"><b></b></div>
+    <div id="progress" style="display: flex;"><b></b></div>
 
     <script src="https://code.jquery.com/jquery-3.6.3.slim.min.js"
         integrity="sha256-ZwqZIVdD3iXNyGHbSYdsmWP//UBokj2FHAxKuSBKDSo=" crossorigin="anonymous"></script>
@@ -170,52 +287,102 @@
     <script type='text/javascript' src='js/app.js'></script>
     <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol' async defer></script>
     <script type="text/javascript">
-        var map, infobox, data;
+        var map, calendar;
         document.body.onload = function () {
-            onLoading(true);
+            document.getElementById('progress').style.display = 'flex';
             var xhr = new XMLHttpRequest();
             xhr.open('GET', 'https://cendocadmin.azurewebsites.net/api/calendario');
             xhr.onload = function (e) {
                 if (xhr.status != 200) {
                     console.log(`Error ${xhr.status}: ${xhr.statusText}`);
                 } else {
-                    var data = JSON.parse(xhr.response);
-                    Window.Entidades = data;
-                    loadEntidades();
-                    loadBingMap();
+                    const data = JSON.parse(xhr.response);
+                    loadMenu(data);
+                    loadBingMap(data);
                     loadCalendar();
-                    onLoading(false);
                 }
             };
             xhr.onerror = function () {
                 console.error("** An error occurred during the XMLHttpRequest");
             };
             xhr.send();
+            document.getElementById('progress').style.display = 'none';
         }
-        function loadEntidades() {
-            var data = Window.Entidades;
-            let menu = document.createElement('div');
-            menu.className = 'list-group p-2';
-            data.forEach(e => {
-                let item = document.createElement('a');
-                item.className = 'list-group-item list-group-item-action';
-                item.addEventListener("click", function () {
-                    onLoading(true);
-                    modalInfo(e.id);
-                }, false);
-                item.innerHTML = `<strong style="color:hsl(${e.entidad.colorHue},50%,50%)">${e.entidad.nombre}</strong> ${e.tipo} [${e.numero}]`;
-                menu.appendChild(item);
+        function loadMenu(data) {
+            document.getElementById('progress').style.display = 'flex';
+            var groups = data.reduce(function (items, key) {
+                (items[key.entidad.nombre] = items[key.entidad.nombre] || []).push(key);
+                return items;
+            }, {});
+            Object.keys(groups).forEach(k => {
+                const group = groups[k];
+                let hasSubmenu = document.createElement('li');
+                hasSubmenu.className = 'has-submenu';
+                let hasSubmenuItem = document.createElement('a');
+                hasSubmenuItem.className = 'list-group-item';
+                hasSubmenuItem.style.color = `hsl(${group[0].entidad.colorHue},100%,20%)`;
+                hasSubmenuItem.style.backgroundColor = `hsl(${group[0].entidad.colorHue},50%,90%)`;
+                hasSubmenuItem.style.borderColor = `hsl(${group[0].entidad.colorHue},50%,50%)`;
+                hasSubmenuItem.innerHTML = `<strong>${k}</strong> <i class="bi small bi-caret-down-fill"></i>`;
+                hasSubmenuItem.addEventListener('click', function (e) {
+                    let nextEl = hasSubmenuItem.nextElementSibling;
+                    let parentEl = hasSubmenuItem.parentElement;
+                    if (nextEl) {
+                        e.preventDefault();
+                        let mycollapse = new bootstrap.Collapse(nextEl);
+
+                        if (nextEl.classList.contains('show')) {
+                            mycollapse.hide();
+                        } else {
+                            mycollapse.show();
+                            var opened_submenu = parentEl.parentElement.querySelector('.submenu.show');
+                            if (opened_submenu) {
+                                new bootstrap.Collapse(opened_submenu);
+                            }
+                        }
+                    }
+                });
+                hasSubmenu.appendChild(hasSubmenuItem);
+                let submenu = document.createElement('div');
+                submenu.className = 'submenu collapse';
+                group.forEach(e => {
+                    let submenuItem = document.createElement('a');
+                    submenuItem.className = 'list-group-item';
+                    submenuItem.style.borderColor = `hsl(${group[0].entidad.colorHue},50%,50%)`;
+                    submenuItem.innerHTML = `${e.tipoDisplayName} [${e.numero}]`;
+                    submenuItem.addEventListener("click", function () {
+                        var xhr = new XMLHttpRequest();
+                        xhr.open('GET', `https://cendocadmin.azurewebsites.net/api/calendario/${e.id}`);
+                        xhr.onload = function (e) {
+                            if (xhr.status != 200) {
+                                console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                            }
+                            else {
+                                const data = JSON.parse(xhr.response);
+                                updateCalendar(data);
+                                updateModal(data);
+                            }
+                        };
+                        xhr.onerror = function () {
+                            console.error("** An error occurred during the XMLHttpRequest");
+                        };
+                        xhr.send();
+                    }, false);
+                    submenu.appendChild(submenuItem);
+                });
+                hasSubmenu.appendChild(submenu);
+                document.getElementById('entidades-menu').appendChild(hasSubmenu);
+                document.getElementById('progress').style.display = 'none';
             });
-            document.getElementById('entidades').appendChild(menu);
         }
-        function loadBingMap() {
-            var data = Window.Entidades;
+        function loadBingMap(data) {
+            document.getElementById('progress').style.display = 'flex';
             map = new Microsoft.Maps.Map(document.getElementById('map'), {
                 credentials: 'Ah5zHTWDWEHh2A3EW50XKN8GEM1u2NBuLspNLzQKVG4XYexEIUs_DU8scCLBidgh',
                 mapTypeId: Microsoft.Maps.MapTypeId.grayscale,
                 center: new Microsoft.Maps.Location(23.5, -101.5),
                 showDashboard: false,
-                zoom: 6
+                zoom: 5
             });
             data.forEach(e => {
                 Microsoft.Maps.loadModule(['Microsoft.Maps.SpatialDataService', 'Microsoft.Maps.Search'], function () {
@@ -270,17 +437,31 @@
                                         };
                                         map.entities.push(polygon);
                                         Microsoft.Maps.Events.addHandler(polygon[0], 'click', function () {
-                                            onLoading(true);
-                                            modalInfo(e.id);
-                                        });
-                                    } else {
-                                        var pin = new Microsoft.Maps.Pushpin(data.location);
-                                        map.entities.push(pin);
-                                        Microsoft.Maps.Events.addHandler(pin, 'click', function () {
-                                            onLoading(true);
-                                            modalInfo(e.id);
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.open('GET', `https://cendocadmin.azurewebsites.net/api/calendario/${e.id}`);
+                                            xhr.onload = function (e) {
+                                                if (xhr.status != 200) {
+                                                    console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                                                }
+                                                else {
+                                                    const data = JSON.parse(xhr.response);
+                                                    updateCalendar(data);
+                                                    updateModal(data);
+                                                }
+                                            };
+                                            xhr.onerror = function () {
+                                                console.error("** An error occurred during the XMLHttpRequest");
+                                            };
+                                            xhr.send();
                                         });
                                     }
+                                    // else {
+                                    //     var pin = new Microsoft.Maps.Pushpin(data.location);
+                                    //     map.entities.push(pin);
+                                    //     Microsoft.Maps.Events.addHandler(pin, 'click', function () {
+                                    //         //
+                                    //     });
+                                    // }
                                 },
                                 polygonStyle,
                                 function errCallback(networkStatus, statusMessage) {
@@ -292,17 +473,19 @@
                     searchManager.geocode(geocodeRequest);
                 });
             });
+            document.getElementById('progress').style.display = 'none';
         }
         function loadCalendar() {
-            var data = Window.Entidades;
+            document.getElementById('progress').style.display = 'flex';
             var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'multiMonthYear', // dayGridMonth timeGridDay
-                multiMonthMaxColumns: 2,
+                multiMonthMinColumns: 2,
+                multiMonthMaxColumns: 4,
                 // eventLimit: false,
                 // views: {
                 //     timeGrid: {
-                //         eventLimit: 3 // adjust to 6 only for timeGridWeek/timeGridDay
+                //         eventLimit: 3 // timeGridWeek / timeGridDay
                 //     }
                 // },
                 headerToolbar: {
@@ -323,9 +506,22 @@
                 //nowIndicator: true,
                 //events: fechas,
                 eventClick: function (e) {
-                    onLoading(true);
-                    console.log(e);
-                    modalInfo(e.event._def.extendedProps.entidadId);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', `https://cendocadmin.azurewebsites.net/api/calendario/${e.id}`);
+                    xhr.onload = function (e) {
+                        if (xhr.status != 200) {
+                            console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+                        }
+                        else {
+                            const data = JSON.parse(xhr.response);
+                            updateCalendar(data);
+                            updateModal(data);
+                        }
+                    };
+                    xhr.onerror = function () {
+                        console.error("** An error occurred during the XMLHttpRequest");
+                    };
+                    xhr.send();
                     //e.el.style.borderColor = 'red';
                 },
                 // eventDidMount: function (info) {
@@ -346,272 +542,255 @@
             });
             calendar.setOption('locale', 'mx');
             calendar.render();
-            Window.Calendar = calendar;
+            document.getElementById('progress').style.display = 'none';
         }
-        function modalInfo(id) {
-            let elemento = Window.Entidades.find(e => e.id = id);
-            console.log(elemento);
-            var calendar = Window.Calendar;
+        function updateCalendar(data) {
             calendar.getEvents().forEach(e => {
                 e.remove();
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Inicio`,
-                description: `Declaratoria de inicio del proceso electoral [${elemento.entidad.nombre}]`,
-                start: elemento.declaratoriaInicio,
+                description: `Declaratoria de inicio del proceso electoral [${data.entidad.nombre}]`,
+                start: data.declaratoriaInicio,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(0,50%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Independientes: Convocatoria`,
-                description: `Convocatoria de las candidaturas independientes [${elemento.entidad.nombre}]`,
-                start: elemento.independientesConvocatoriaInicio,
-                end: elemento.independientesConvocatoriaFin,
+                description: `Convocatoria de las candidaturas independientes [${data.entidad.nombre}]`,
+                start: data.independientesConvocatoriaInicio,
+                end: data.independientesConvocatoriaFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(180,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Independientes: Manifestación de intención`,
-                description: `Manifestación de intención de las candidaturas independientes [${elemento.entidad.nombre}]`,
-                start: elemento.independientesIntencionInicio,
-                end: elemento.independientesIntencionFin,
+                description: `Manifestación de intención de las candidaturas independientes [${data.entidad.nombre}]`,
+                start: data.independientesIntencionInicio,
+                end: data.independientesIntencionFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(180,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Independientes: Obtención de apoyo`,
-                description: `Obtención de apoyo de las candidaturas independientes [${elemento.entidad.nombre}]`,
-                start: elemento.independientesApoyoInicio,
-                end: elemento.independientesApoyoFin,
+                description: `Obtención de apoyo de las candidaturas independientes [${data.entidad.nombre}]`,
+                start: data.independientesApoyoInicio,
+                end: data.independientesApoyoFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(180,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Independientes: Solicitud de registro`,
-                description: `Solicitud de registro de las candidaturas independientes [${elemento.entidad.nombre}]`,
-                start: elemento.independientesRegistroInicio,
-                end: elemento.independientesRegistroFin,
+                description: `Solicitud de registro de las candidaturas independientes [${data.entidad.nombre}]`,
+                start: data.independientesRegistroInicio,
+                end: data.independientesRegistroFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(180,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Independientes: Declaratoria de procedencia`,
-                description: `Declaratoria de procedencia de las candidaturas independientes [${elemento.entidad.nombre}]`,
-                start: elemento.independientesProcedenciaInicio,
-                end: elemento.independientesProcedenciaFin,
+                description: `Declaratoria de procedencia de las candidaturas independientes [${data.entidad.nombre}]`,
+                start: data.independientesProcedenciaInicio,
+                end: data.independientesProcedenciaFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(180,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Partidos: Precampañas`,
-                description: `Precampañas de partidos políticos [${elemento.entidad.nombre}]`,
-                start: elemento.partidosPrecampanasInicio,
-                end: elemento.partidosPrecampanasFin,
+                description: `Precampañas de partidos políticos [${data.entidad.nombre}]`,
+                start: data.partidosPrecampanasInicio,
+                end: data.partidosPrecampanasFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(60,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Partidos: Solicitud de registro`,
-                description: `Solicitud de registro de los partidos políticos [${elemento.entidad.nombre}]`,
-                start: elemento.partidosRegistroInicio,
-                end: elemento.partidosRegistroFin,
+                description: `Solicitud de registro de los partidos políticos [${data.entidad.nombre}]`,
+                start: data.partidosRegistroInicio,
+                end: data.partidosRegistroFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(60,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Campañas`,
-                description: `Campañas electorales [${elemento.entidad.nombre}]`,
-                start: elemento.campanasInicio,
-                end: elemento.campanasFin,
+                description: `Campañas electorales [${data.entidad.nombre}]`,
+                start: data.campanasInicio,
+                end: data.campanasFin,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(240,25%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Jornada`,
-                description: `Jornada electoral	[${elemento.entidad.nombre}]`,
-                start: elemento.jornadaInicio,
+                description: `Jornada electoral	[${data.entidad.nombre}]`,
+                start: data.jornadaInicio,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(0,50%,85%)`
             });
             calendar.addEvent({
-                entidadId: id,
                 title: `Instalación`,
-                description: `Fecha de instalación [${elemento.entidad.nombre}]`,
-                start: elemento.instalacionInicio,
+                description: `Fecha de instalación [${data.entidad.nombre}]`,
+                start: data.instalacionInicio,
                 allDay: true,
                 textColor: `#000`,
                 color: `hsl(120,25%,85%)`
             });
-
+        }
+        function updateModal(data) {
             const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
-            document.getElementById('calendarModal-title').innerHTML = elemento.entidad.nombre;
-            document.getElementById('calendarModal-body-tipo-numero').innerHTML = `${elemento.tipoDisplayName} (${elemento.numero} cargos)`;
-            document.getElementById('calendarModal-body-extraordinariaGetDisplayName').innerHTML = elemento.extraordinariaGetDisplayName;
-            document.getElementById('calendarModal-body-federalGetDisplayName').innerHTML = elemento.federalGetDisplayName;
-            document.getElementById('calendarModal-body-representacionGetDisplayName').innerHTML = elemento.representacionGetDisplayName;
+            document.getElementById('calendarModal-title').innerHTML = data.entidad.nombre;
+            document.getElementById('calendarModal-body-tipo-numero').innerHTML = `${data.tipoDisplayName} (${data.numero} cargos)`;
+            document.getElementById('calendarModal-body-extraordinariaGetDisplayName').innerHTML = data.extraordinariaGetDisplayName;
+            document.getElementById('calendarModal-body-federalGetDisplayName').innerHTML = data.federalGetDisplayName;
+            document.getElementById('calendarModal-body-representacionGetDisplayName').innerHTML = data.representacionGetDisplayName;
             document.getElementById('calendarModal-body-cargosUrl').innerHTML = '';
-            elemento.cargosUrl.split(',').forEach((e, i) => {
+            data.cargosUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-cargosUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-declaratoriaInicio').innerHTML = new Date(elemento.declaratoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-declaratoriaInicio').innerHTML = new Date(data.declaratoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-declaratoriaUrl').innerHTML = '';
-            elemento.declaratoriaUrl.split(',').forEach((e, i) => {
+            data.declaratoriaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-declaratoriaUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-independientesConvocatoriaInicio').innerHTML = new Date(elemento.independientesConvocatoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-independientesConvocatoriaFin').innerHTML = new Date(elemento.independientesConvocatoriaFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesConvocatoriaInicio').innerHTML = new Date(data.independientesConvocatoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesConvocatoriaFin').innerHTML = new Date(data.independientesConvocatoriaFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesConvocatoriaUrl').innerHTML = '';
-            elemento.independientesConvocatoriaUrl.split(',').forEach((e, i) => {
+            data.independientesConvocatoriaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-independientesConvocatoriaUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-independientesIntencionInicio').innerHTML = new Date(elemento.independientesIntencionInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-independientesIntencionFin').innerHTML = new Date(elemento.independientesIntencionFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesIntencionInicio').innerHTML = new Date(data.independientesIntencionInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesIntencionFin').innerHTML = new Date(data.independientesIntencionFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesIntencionUrl').innerHTML = '';
-            elemento.independientesIntencionUrl.split(',').forEach((e, i) => {
+            data.independientesIntencionUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-independientesIntencionUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-independientesApoyoInicio').innerHTML = new Date(elemento.independientesApoyoInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-independientesApoyoFin').innerHTML = new Date(elemento.independientesApoyoFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesApoyoInicio').innerHTML = new Date(data.independientesApoyoInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesApoyoFin').innerHTML = new Date(data.independientesApoyoFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesApoyoUrl').innerHTML = '';
-            elemento.independientesApoyoUrl.split(',').forEach((e, i) => {
+            data.independientesApoyoUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-independientesApoyoUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-independientesRegistroInicio').innerHTML = new Date(elemento.independientesRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-independientesRegistroFin').innerHTML = new Date(elemento.independientesRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesRegistroInicio').innerHTML = new Date(data.independientesRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesRegistroFin').innerHTML = new Date(data.independientesRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesRegistroUrl').innerHTML = '';
-            elemento.independientesRegistroUrl.split(',').forEach((e, i) => {
+            data.independientesRegistroUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-independientesRegistroUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-independientesProcedenciaInicio').innerHTML = new Date(elemento.independientesProcedenciaInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-independientesProcedenciaFin').innerHTML = new Date(elemento.independientesProcedenciaFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesProcedenciaInicio').innerHTML = new Date(data.independientesProcedenciaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesProcedenciaFin').innerHTML = new Date(data.independientesProcedenciaFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesProcedenciaUrl').innerHTML = '';
-            elemento.independientesProcedenciaUrl.split(',').forEach((e, i) => {
+            data.independientesProcedenciaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-independientesProcedenciaUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-partidosPrecampanasInicio').innerHTML = new Date(elemento.partidosPrecampanasInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-partidosPrecampanasFin').innerHTML = new Date(elemento.partidosPrecampanasFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosPrecampanasInicio').innerHTML = new Date(data.partidosPrecampanasInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosPrecampanasFin').innerHTML = new Date(data.partidosPrecampanasFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-partidosPrecampanasUrl').innerHTML = '';
-            elemento.partidosPrecampanasUrl.split(',').forEach((e, i) => {
+            data.partidosPrecampanasUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-partidosPrecampanasUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-partidosRegistroInicio').innerHTML = new Date(elemento.partidosRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-partidosRegistroFin').innerHTML = new Date(elemento.partidosRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosRegistroInicio').innerHTML = new Date(data.partidosRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosRegistroFin').innerHTML = new Date(data.partidosRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-partidosRegistroUrl').innerHTML = '';
-            elemento.partidosRegistroUrl.split(',').forEach((e, i) => {
+            data.partidosRegistroUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-partidosRegistroUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-campanasInicio').innerHTML = new Date(elemento.campanasInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-campanasFin').innerHTML = new Date(elemento.campanasFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-campanasInicio').innerHTML = new Date(data.campanasInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-campanasFin').innerHTML = new Date(data.campanasFin).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-campanasUrl').innerHTML = '';
-            elemento.campanasUrl.split(',').forEach((e, i) => {
+            data.campanasUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-campanasUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-jornadaInicio').innerHTML = new Date(elemento.jornadaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-jornadaInicio').innerHTML = new Date(data.jornadaInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-jornadaUrl').innerHTML = '';
-            elemento.jornadaUrl.split(',').forEach((e, i) => {
+            data.jornadaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-jornadaUrl').appendChild(item);
             });
 
-            document.getElementById('calendarModal-body-instalacionInicio').innerHTML = new Date(elemento.instalacionInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-instalacionInicio').innerHTML = new Date(data.instalacionInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-instalacionUrl').innerHTML = '';
-            elemento.instalacionUrl.split(',').forEach((e, i) => {
+            data.instalacionUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
-                item.className = 'btn btn-sm btn-outline-secondary';
+                item.className = 'd-block';
                 item.setAttribute('target', '_blank');
                 item.setAttribute('href', e);
                 document.getElementById('calendarModal-body-instalacionUrl').appendChild(item);
             });
-
-            //document.getElementById('calendarModal-body-').innerHTML = elemento.;
-
-            onLoading(false);
             $('#calendarModal').modal('show');
         }
     </script>

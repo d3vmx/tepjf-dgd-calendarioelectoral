@@ -1,27 +1,54 @@
-﻿a{
-    color: hsl(220,30%,30%);
+﻿html {
+    overflow-x: hidden;
+    background-color: #eee;
+}
+
+a {
+    color: hsl(220, 30%, 30%);
     text-decoration: none;
 }
+
 #entidades {
-    height: 700px;
-    background-color:hsl(220,10%,30%);
+    height: 500px;
+    background-color: hsl(220, 10%, 30%);
 }
-#entidades .list-group{
+
+#entidades .sidebar {
     overflow-y: auto;
-    max-height: calc(100% - 40px);
+    /* max-height: calc(100% - 40px); */
+    max-height: 100%;
 }
-#entidades .list-group-item{
-    background-color: hsla(220,0%,0%,.1);
-    color: hsla(220,50%,90%,1);
+
+#entidades .sidebar .list-group-item {
+    background-color: hsla(220, 20%, 95%, .9);
+    border: 1px solid hsla(0, 0%, 50%, 0.5);
+    color: hsla(220, 50%, 10%, 1);
+    cursor: pointer;
+}
+
+#entidades .sidebar .submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#entidades .sidebar .submenu .list-group-item {
+    background-color: hsla(220, 0%, 0%, .1);
+    border: 1px solid hsla(0, 0%, 50%, 0.5);
+    color: hsla(220, 50%, 90%, 1);
     cursor: pointer;
 }
 
 #map {
-    height: 700px;
+    height: 500px;
 }
 
 #calendar {
-    background-color:hsl(220,10%,90%);
+    background-color: hsl(220, 10%, 90%);
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: .5rem;
 }
 
 a.fc-event {
@@ -34,37 +61,38 @@ a.fc-event {
 }
 
 #progress {
-    display: none;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 9999;
     width: 100vw;
     height: 100vh;
-    background-color: hsla(200,25%,75%,0.25);
+    background-color: hsla(200, 25%, 75%, 0.25);
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
 }
-    #progress b {
-        position: fixed;
-        z-index: 9999;
-        top: 0;
-        left: -6px;
-        width: 50%;
-        height: 8px;
-        background-color: hsl(230, 50%, 50%);
-        -moz-border-radius: 1px;
-        -webkit-border-radius: 1px;
-        border-radius: 1px;
-        -moz-transition: width 600ms ease-out,opacity 500ms linear;
-        -ms-transition: width 600ms ease-out,opacity 500ms linear;
-        -o-transition: width 600ms ease-out,opacity 500ms linear;
-        -webkit-transition: width 600ms ease-out,opacity 500ms linear;
-        transition: width 1000ms ease-out,opacity 500ms linear;
-        -webkit-animation: progress-bar 5s infinite;
-        animation: progress-bar 5s infinite;
-    }
+
+#progress b {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: -6px;
+    width: 50%;
+    height: 8px;
+    background-color: hsl(230, 50%, 50%);
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    -moz-transition: width 600ms ease-out, opacity 500ms linear;
+    -ms-transition: width 600ms ease-out, opacity 500ms linear;
+    -o-transition: width 600ms ease-out, opacity 500ms linear;
+    -webkit-transition: width 600ms ease-out, opacity 500ms linear;
+    transition: width 1000ms ease-out, opacity 500ms linear;
+    -webkit-animation: progress-bar 5s infinite;
+    animation: progress-bar 5s infinite;
+}
+
 @keyframes progress-bar {
     0% {
         width: 0;
@@ -74,6 +102,7 @@ a.fc-event {
         width: 100%;
     }
 }
+
 @-webkit-keyframes progress-bar {
     0% {
         width: 0;
