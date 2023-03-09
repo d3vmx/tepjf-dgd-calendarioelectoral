@@ -30,7 +30,7 @@
                 <div class="modal-body">
                     <table class="table table-bordered">
                         <tr>
-                            <th colspan="2" style="background-color:hsl(220,0%,85%)">
+                            <th width="380" colspan="2" style="background-color:hsl(220,0%,85%)">
                                 Cargos a elegir
                             </th>
                             <td>
@@ -49,7 +49,7 @@
                                 Declaratoria de inicio del proceso electoral
                             </th>
                             <td id="calendarModal-body-declaratoriaInicio"> </td>
-                            <td id="calendarModal-body-declaratoriaUrl">                            </td>
+                            <td id="calendarModal-body-declaratoriaUrl"> </td>
                         </tr>
                         <tr>
                             <td width="120" rowspan="6" style="background-color:hsl(180,25%,85%)">
@@ -142,17 +142,14 @@
                             <td id="calendarModal-body-campanasUrl"></td>
                         </tr>
                         <tr>
-                            <th colspan="2" style="background-color:hsl(120,25%,85%)">
+                            <th colspan="2" style="background-color:hsl(0,50%,85%)">
                                 Jornada electoral
                             </th>
-                            <td>
-                                del <span id="calendarModal-body-jornadaInicio"></span> al <span
-                                    id="calendarModal-body-jornadaFin"></span>
-                            </td>
+                            <td id="calendarModal-body-jornadaInicio"></td>
                             <td id="calendarModal-body-jornadaUrl"></td>
                         </tr>
                         <tr>
-                            <th colspan="2" style="background-color:hsl(0,50%,85%)">
+                            <th colspan="2" style="background-color:hsl(120,25%,85%)">
                                 Fecha de instalación
                             </th>
                             <td id="calendarModal-body-instalacionInicio"> </td>
@@ -187,118 +184,6 @@
                     loadEntidades();
                     loadBingMap();
                     loadCalendar();
-                    var fechas = [];
-                    data.forEach(e => {
-                        fechas.push({
-                            id: e.id,
-                            title: `Inicio`,
-                            description: `Declaratoria de inicio del proceso electoral [${e.entidad.nombre}]`,
-                            start: e.declaratoriaInicio,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(0,50%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Independientes: Convocatoria`,
-                            description: `Convocatoria de las candidaturas independientes [${e.entidad.nombre}]`,
-                            start: e.independientesConvocatoriaInicio,
-                            end: e.independientesConvocatoriaFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(180,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Independientes: Manifestación de intención`,
-                            description: `Manifestación de intención de las candidaturas independientes [${e.entidad.nombre}]`,
-                            start: e.independientesIntencionInicio,
-                            end: e.independientesIntencionFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(180,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Independientes: Obtención de apoyo`,
-                            description: `Obtención de apoyo de las candidaturas independientes [${e.entidad.nombre}]`,
-                            start: e.independientesApoyoInicio,
-                            end: e.independientesApoyoFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(180,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Independientes: Solicitud de registro`,
-                            description: `Solicitud de registro de las candidaturas independientes [${e.entidad.nombre}]`,
-                            start: e.independientesRegistroInicio,
-                            end: e.independientesRegistroFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(180,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Independientes: Declaratoria de procedencia`,
-                            description: `Declaratoria de procedencia de las candidaturas independientes [${e.entidad.nombre}]`,
-                            start: e.independientesProcedenciaInicio,
-                            end: e.independientesProcedenciaFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(180,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Partidos: Precampañas`,
-                            description: `Precampañas de partidos políticos [${e.entidad.nombre}]`,
-                            start: e.partidosPrecampanasInicio,
-                            end: e.partidosPrecampanasFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(60,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Partidos: Solicitud de registro`,
-                            description: `Solicitud de registro de los partidos políticos [${e.entidad.nombre}]`,
-                            start: e.partidosRegistroInicio,
-                            end: e.partidosRegistroFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(60,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Campañas`,
-                            description: `Campañas electorales [${e.entidad.nombre}]`,
-                            start: e.campanasInicio,
-                            end: e.campanasFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(240,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Jornada`,
-                            description: `Jornada electoral	[${e.entidad.nombre}]`,
-                            start: e.jornadaInicio,
-                            end: e.jornadaFin,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(120,25%,85%)`
-                        });
-                        fechas.push({
-                            id: e.id,
-                            title: `Instalación`,
-                            description: `Fecha de instalación [${e.entidad.nombre}]`,
-                            start: e.instalacionInicio,
-                            allDay: true,
-                            textColor: `#000`,
-                            color: `hsl(0,50%,85%)`
-                        });
-                    });
-                    Window.Fechas = fechas;
                     onLoading(false);
                 }
             };
@@ -318,7 +203,7 @@
                     onLoading(true);
                     modalInfo(e.id);
                 }, false);
-                item.innerHTML = `<strong style="color:hsl(${e.entidad.colorHue},50%,50%)">${e.entidad.nombre}</strong>: ${e.tipo} [${e.numero}]`;
+                item.innerHTML = `<strong style="color:hsl(${e.entidad.colorHue},50%,50%)">${e.entidad.nombre}</strong> ${e.tipo} [${e.numero}]`;
                 menu.appendChild(item);
             });
             document.getElementById('entidades').appendChild(menu);
@@ -439,7 +324,8 @@
                 //events: fechas,
                 eventClick: function (e) {
                     onLoading(true);
-                    modalInfo(e.event._def.publicId);
+                    console.log(e);
+                    modalInfo(e.event._def.extendedProps.entidadId);
                     //e.el.style.borderColor = 'red';
                 },
                 // eventDidMount: function (info) {
@@ -463,18 +349,120 @@
             Window.Calendar = calendar;
         }
         function modalInfo(id) {
-            var entidades = Window.Entidades;
-            const elemento = entidades.find(e => e.id = id);
+            let elemento = Window.Entidades.find(e => e.id = id);
             console.log(elemento);
-
-            var fechas = Window.Fechas;
             var calendar = Window.Calendar;
             calendar.getEvents().forEach(e => {
                 e.remove();
             });
-            fechas.forEach(e => {
-                calendar.addEvent(e);
+            calendar.addEvent({
+                entidadId: id,
+                title: `Inicio`,
+                description: `Declaratoria de inicio del proceso electoral [${elemento.entidad.nombre}]`,
+                start: elemento.declaratoriaInicio,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(0,50%,85%)`
             });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Independientes: Convocatoria`,
+                description: `Convocatoria de las candidaturas independientes [${elemento.entidad.nombre}]`,
+                start: elemento.independientesConvocatoriaInicio,
+                end: elemento.independientesConvocatoriaFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(180,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Independientes: Manifestación de intención`,
+                description: `Manifestación de intención de las candidaturas independientes [${elemento.entidad.nombre}]`,
+                start: elemento.independientesIntencionInicio,
+                end: elemento.independientesIntencionFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(180,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Independientes: Obtención de apoyo`,
+                description: `Obtención de apoyo de las candidaturas independientes [${elemento.entidad.nombre}]`,
+                start: elemento.independientesApoyoInicio,
+                end: elemento.independientesApoyoFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(180,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Independientes: Solicitud de registro`,
+                description: `Solicitud de registro de las candidaturas independientes [${elemento.entidad.nombre}]`,
+                start: elemento.independientesRegistroInicio,
+                end: elemento.independientesRegistroFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(180,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Independientes: Declaratoria de procedencia`,
+                description: `Declaratoria de procedencia de las candidaturas independientes [${elemento.entidad.nombre}]`,
+                start: elemento.independientesProcedenciaInicio,
+                end: elemento.independientesProcedenciaFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(180,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Partidos: Precampañas`,
+                description: `Precampañas de partidos políticos [${elemento.entidad.nombre}]`,
+                start: elemento.partidosPrecampanasInicio,
+                end: elemento.partidosPrecampanasFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(60,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Partidos: Solicitud de registro`,
+                description: `Solicitud de registro de los partidos políticos [${elemento.entidad.nombre}]`,
+                start: elemento.partidosRegistroInicio,
+                end: elemento.partidosRegistroFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(60,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Campañas`,
+                description: `Campañas electorales [${elemento.entidad.nombre}]`,
+                start: elemento.campanasInicio,
+                end: elemento.campanasFin,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(240,25%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Jornada`,
+                description: `Jornada electoral	[${elemento.entidad.nombre}]`,
+                start: elemento.jornadaInicio,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(0,50%,85%)`
+            });
+            calendar.addEvent({
+                entidadId: id,
+                title: `Instalación`,
+                description: `Fecha de instalación [${elemento.entidad.nombre}]`,
+                start: elemento.instalacionInicio,
+                allDay: true,
+                textColor: `#000`,
+                color: `hsl(120,25%,85%)`
+            });
+
             const opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
             document.getElementById('calendarModal-title').innerHTML = elemento.entidad.nombre;
@@ -482,6 +470,7 @@
             document.getElementById('calendarModal-body-extraordinariaGetDisplayName').innerHTML = elemento.extraordinariaGetDisplayName;
             document.getElementById('calendarModal-body-federalGetDisplayName').innerHTML = elemento.federalGetDisplayName;
             document.getElementById('calendarModal-body-representacionGetDisplayName').innerHTML = elemento.representacionGetDisplayName;
+            document.getElementById('calendarModal-body-cargosUrl').innerHTML = '';
             elemento.cargosUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -492,6 +481,7 @@
             });
 
             document.getElementById('calendarModal-body-declaratoriaInicio').innerHTML = new Date(elemento.declaratoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-declaratoriaUrl').innerHTML = '';
             elemento.declaratoriaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -503,6 +493,7 @@
 
             document.getElementById('calendarModal-body-independientesConvocatoriaInicio').innerHTML = new Date(elemento.independientesConvocatoriaInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesConvocatoriaFin').innerHTML = new Date(elemento.independientesConvocatoriaFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesConvocatoriaUrl').innerHTML = '';
             elemento.independientesConvocatoriaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -514,6 +505,7 @@
 
             document.getElementById('calendarModal-body-independientesIntencionInicio').innerHTML = new Date(elemento.independientesIntencionInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesIntencionFin').innerHTML = new Date(elemento.independientesIntencionFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesIntencionUrl').innerHTML = '';
             elemento.independientesIntencionUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -525,6 +517,7 @@
 
             document.getElementById('calendarModal-body-independientesApoyoInicio').innerHTML = new Date(elemento.independientesApoyoInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesApoyoFin').innerHTML = new Date(elemento.independientesApoyoFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesApoyoUrl').innerHTML = '';
             elemento.independientesApoyoUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -536,6 +529,7 @@
 
             document.getElementById('calendarModal-body-independientesRegistroInicio').innerHTML = new Date(elemento.independientesRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesRegistroFin').innerHTML = new Date(elemento.independientesRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesRegistroUrl').innerHTML = '';
             elemento.independientesRegistroUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -547,6 +541,7 @@
 
             document.getElementById('calendarModal-body-independientesProcedenciaInicio').innerHTML = new Date(elemento.independientesProcedenciaInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-independientesProcedenciaFin').innerHTML = new Date(elemento.independientesProcedenciaFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-independientesProcedenciaUrl').innerHTML = '';
             elemento.independientesProcedenciaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -558,6 +553,7 @@
 
             document.getElementById('calendarModal-body-partidosPrecampanasInicio').innerHTML = new Date(elemento.partidosPrecampanasInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-partidosPrecampanasFin').innerHTML = new Date(elemento.partidosPrecampanasFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosPrecampanasUrl').innerHTML = '';
             elemento.partidosPrecampanasUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -569,6 +565,7 @@
 
             document.getElementById('calendarModal-body-partidosRegistroInicio').innerHTML = new Date(elemento.partidosRegistroInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-partidosRegistroFin').innerHTML = new Date(elemento.partidosRegistroFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-partidosRegistroUrl').innerHTML = '';
             elemento.partidosRegistroUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -580,6 +577,7 @@
 
             document.getElementById('calendarModal-body-campanasInicio').innerHTML = new Date(elemento.campanasInicio).toLocaleDateString('es-MX', opcionesFecha);
             document.getElementById('calendarModal-body-campanasFin').innerHTML = new Date(elemento.campanasFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-campanasUrl').innerHTML = '';
             elemento.campanasUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -590,7 +588,7 @@
             });
 
             document.getElementById('calendarModal-body-jornadaInicio').innerHTML = new Date(elemento.jornadaInicio).toLocaleDateString('es-MX', opcionesFecha);
-            document.getElementById('calendarModal-body-jornadaFin').innerHTML = new Date(elemento.jornadaFin).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-jornadaUrl').innerHTML = '';
             elemento.jornadaUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;
@@ -601,6 +599,7 @@
             });
 
             document.getElementById('calendarModal-body-instalacionInicio').innerHTML = new Date(elemento.instalacionInicio).toLocaleDateString('es-MX', opcionesFecha);
+            document.getElementById('calendarModal-body-instalacionUrl').innerHTML = '';
             elemento.instalacionUrl.split(',').forEach((e, i) => {
                 let item = document.createElement('a');
                 item.text = `Referencia ${++i}`;

@@ -24,8 +24,7 @@
     background-color:hsl(220,10%,90%);
 }
 
-.fc-direction-ltr .fc-daygrid-event.fc-event-end,
-.fc-direction-ltr .fc-daygrid-event.fc-event-start {
+a.fc-event {
     cursor: pointer;
 }
 
